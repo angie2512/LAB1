@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -45,6 +46,8 @@ public class Pagina2 extends AppCompatActivity {
     private ImageView[]partes;
     private int sizeParts=6;
     private int currPart;
+    ArrayList<String> estadisticas = new ArrayList<>();
+
 
     private TextView resultadoTextView;
 
@@ -88,6 +91,7 @@ public class Pagina2 extends AppCompatActivity {
     }
 
     private void jugarJuego(){
+
         tiempoInicio = System.currentTimeMillis();
         String nuevaPalabra=palabras[random.nextInt(palabras.length)];
         while(nuevaPalabra.equals(repetida))nuevaPalabra=palabras[random.nextInt(palabras.length)];
@@ -131,6 +135,7 @@ public class Pagina2 extends AppCompatActivity {
                 int segundos = (int) (tiempoTranscurrido / 1000);
                 resultadosJuegos.add("Juego " + (resultadosJuegos.size() + 1) + ": Terminó en " + segundos + "s");
                 resultadoTextView.setText("Ganó en ");
+                estadisticas.add("Terminó en "+ (segundos)+"s");
                 tiempoTextView.setText(segundos + "s");
                 resultadoTextView.setVisibility(View.VISIBLE);
                 tiempoTextView.setVisibility(View.VISIBLE);
@@ -144,6 +149,7 @@ public class Pagina2 extends AppCompatActivity {
             int segundos = (int) (tiempoTranscurrido / 1000);
             resultadosJuegos.add("Juego " + (resultadosJuegos.size() + 1) + ": Terminó en " + segundos + "s");
             resultadoTextView.setText("Perdió en ");
+            estadisticas.add("Terminó en "+ (segundos)+"s");
             tiempoTextView.setText(segundos + "s");
             resultadoTextView.setVisibility(View.VISIBLE);
             tiempoTextView.setVisibility(View.VISIBLE);
@@ -184,6 +190,7 @@ public class Pagina2 extends AppCompatActivity {
                     // Manejar las opciones de menú aquí
                     if (item.getItemId() == R.id.action_estadisticas) {
                         Intent intent = new Intent(Pagina2.this, EstadisticasActivity.class);
+                        intent.putExtra("estadisticas",estadisticas);
                         startActivity(intent);
                         return true;
                     }
