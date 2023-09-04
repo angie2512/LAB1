@@ -77,6 +77,7 @@ public class Pagina2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 iniciarNuevaPartida();
+                estadisticas.add("Canceló");
             }
         });
 
